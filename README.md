@@ -2,6 +2,11 @@
 
 A book library web application built with [Laravel](https://laravel.com/) (PHP 8.3+).
 
+The codebase has two sides:
+
+- **Web UI** — server-rendered pages (Blade), styles and scripts via [Vite](https://vitejs.dev/) (see `resources/views`, `resources/css`, `resources/js`). Routes are registered in `routes/web.php` (browsers use the app under your `APP_URL`).
+- **REST API** — JSON HTTP API for books under the `/api` prefix (`routes/api.php`, controllers in `app/Http/Controllers/Api`). See **API documentation (Swagger UI)** below for the OpenAPI spec and interactive docs.
+
 ## Requirements
 
 - PHP `^8.3` with required extensions (see the [Laravel server requirements](https://laravel.com/docs/deployment#server-requirements))
