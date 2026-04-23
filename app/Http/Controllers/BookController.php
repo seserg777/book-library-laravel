@@ -4,25 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
-use App\Http\Resources\BookResource;
 use App\Models\Book;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class BookController extends Controller
 {
-    public function index(Request $request): JsonResponse|View
+    public function index(): View
     {
         $books = Book::query()
             ->orderByDesc('id')
             ->paginate(15);
-
-        if ($this->wantsApiResponse($request)) {
-            return BookResource::collection($books)->response();
-        }
 
         return view('books.index', ['books' => $books]);
     }
@@ -32,27 +24,17 @@ class BookController extends Controller
         return view('books.create');
     }
 
-    public function store(StoreBookRequest $request): JsonResponse|RedirectResponse
+    public function store(StoreBookRequest $request): RedirectResponse
     {
-        $book = Book::query()->create($request->validated());
-
-        if ($this->wantsApiResponse($request)) {
-            return (new BookResource($book))
-                ->response()
-                ->setStatusCode(201);
-        }
+        Book::query()->create($request->validated());
 
         return redirect()
             ->route('home')
             ->with('status', 'Book created');
     }
 
-    public function show(Request $request, Book $book): JsonResponse|View
+    public function show(Book $book): View
     {
-        if ($this->wantsApiResponse($request)) {
-            return (new BookResource($book))->response();
-        }
-
         return view('books.show', ['book' => $book]);
     }
 
@@ -61,34 +43,21 @@ class BookController extends Controller
         return view('books.edit', ['book' => $book]);
     }
 
-    public function update(UpdateBookRequest $request, Book $book): JsonResponse|RedirectResponse
+    public function update(UpdateBookRequest $request, Book $book): RedirectResponse
     {
         $book->update($request->validated());
-
-        if ($this->wantsApiResponse($request)) {
-            return (new BookResource($book->fresh()))->response();
-        }
 
         return redirect()
             ->route('books.show', $book)
             ->with('status', 'Book updated');
     }
 
-    public function destroy(Request $request, Book $book): JsonResponse|RedirectResponse|Response
+    public function destroy(Book $book): RedirectResponse
     {
         $book->delete();
-
-        if ($this->wantsApiResponse($request)) {
-            return response()->noContent();
-        }
 
         return redirect()
             ->route('home')
             ->with('status', 'Book deleted');
-    }
-
-    private function wantsApiResponse(Request $request): bool
-    {
-        return $request->expectsJson() || $request->is('api/*');
     }
 }
