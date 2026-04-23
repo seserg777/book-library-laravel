@@ -54,6 +54,7 @@ class Book extends Model
     /**
      * @return array<string, string>
      */
+    // Map DB columns to native types.
     protected function casts(): array
     {
         return [
