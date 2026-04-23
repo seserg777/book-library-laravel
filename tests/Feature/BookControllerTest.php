@@ -28,7 +28,10 @@ class BookControllerTest extends TestCase
 
     public function test_web_index_returns_ok(): void
     {
-        $this->get(route('books.index'))->assertOk();
+        $this->get(route('books.index'))
+            ->assertOk()
+            ->assertViewIs('books.index')
+            ->assertSee('All books', escape: false);
     }
 
     public function test_api_index_returns_json_collection(): void
@@ -80,5 +83,22 @@ class BookControllerTest extends TestCase
             ->assertNoContent();
 
         $this->assertDatabaseCount('books', 0);
+    }
+
+    public function test_api_create_returns_json_for_new_book(): void
+    {
+        $this->getJson('/api/books/create')
+            ->assertOk()
+            ->assertJsonPath('data.id', null);
+    }
+
+    public function test_api_edit_returns_same_shape_as_show(): void
+    {
+        $book = Book::query()->create($this->validBookAttributes());
+
+        $this->getJson('/api/books/'.$book->id.'/edit')
+            ->assertOk()
+            ->assertJsonPath('data.id', $book->id)
+            ->assertJsonPath('data.title', 'Test Book');
     }
 }
