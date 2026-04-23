@@ -6,7 +6,7 @@ A book library web application built with [Laravel](https://laravel.com/) (PHP 8
 
 - PHP `^8.3` with required extensions (see the [Laravel server requirements](https://laravel.com/docs/deployment#server-requirements))
 - [Composer](https://getcomposer.org/)
-- A supported database (MySQL, MariaDB, PostgreSQL, or SQLite) if you use database features
+- A supported database MySQL
 
 ## Setup
 
@@ -51,7 +51,3 @@ A book library web application built with [Laravel](https://laravel.com/) (PHP 8
 - Local development server: `php artisan serve`
 - Code style: `vendor/bin/pint` (Laravel Pint is included as a dev dependency)
 - Tests: `php artisan test` or `vendor/bin/phpunit`
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). Application-specific code follows the same license unless stated otherwise in this repository.
