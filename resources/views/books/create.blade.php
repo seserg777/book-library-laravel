@@ -2,10 +2,20 @@
 
 @section('title', 'Add book')
 
+@section('tailadmin_heading', 'Add book')
+
 @section('content')
-    <h1 class="text-2xl font-semibold mb-4">Add book</h1>
-    <form method="post" action="{{ route('books.store') }}" class="space-y-4 max-w-md">
-        @csrf
-        @include('books._form', ['book' => null, 'button' => 'Create'])
-    </form>
+    <div
+        class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]"
+    >
+        <div class="px-5 py-4 sm:px-6 sm:py-5">
+            <h3 class="text-base font-medium text-gray-800 dark:text-white/90">New book</h3>
+        </div>
+        <div class="space-y-6 border-t border-gray-100 p-5 sm:p-6 dark:border-gray-800">
+            <form method="post" action="{{ route('books.store') }}" class="max-w-xl space-y-6">
+                @csrf
+                @include('books._form', ['book' => null, 'button' => 'Create'])
+            </form>
+        </div>
+    </div>
 @endsection
