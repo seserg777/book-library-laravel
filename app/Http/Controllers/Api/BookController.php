@@ -27,6 +27,7 @@ class BookController extends Controller
             ),
         ],
     )]
+    // Return paginated books as JSON.
     public function index(): JsonResponse
     {
         $books = Book::query()
@@ -49,6 +50,7 @@ class BookController extends Controller
             ),
         ],
     )]
+    // Return empty new-book resource JSON.
     public function create(): JsonResponse
     {
         return (new BookResource(new Book))->response();
@@ -75,6 +77,7 @@ class BookController extends Controller
             ),
         ],
     )]
+    // Create book, return 201 and resource JSON.
     public function store(StoreBookRequest $request): JsonResponse
     {
         $book = Book::query()->create($request->validated());
@@ -109,6 +112,7 @@ class BookController extends Controller
             ),
         ],
     )]
+    // Return one book as JSON resource.
     public function show(Book $book): JsonResponse
     {
         return (new BookResource($book))->response();
@@ -139,6 +143,7 @@ class BookController extends Controller
             ),
         ],
     )]
+    // Return book for edit, same shape as show.
     public function edit(Book $book): JsonResponse
     {
         return (new BookResource($book))->response();
@@ -209,6 +214,7 @@ class BookController extends Controller
             ),
         ],
     )]
+    // Update book, return fresh resource JSON.
     public function update(UpdateBookRequest $request, Book $book): JsonResponse
     {
         $book->update($request->validated());
@@ -240,6 +246,7 @@ class BookController extends Controller
             ),
         ],
     )]
+    // Delete book, respond 204 no content.
     public function destroy(Book $book): Response
     {
         $book->delete();

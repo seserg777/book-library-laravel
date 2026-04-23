@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreBookRequest extends FormRequest
 {
+    // No authorization yet.
     public function authorize(): bool
     {
         return true;
@@ -14,6 +15,7 @@ class StoreBookRequest extends FormRequest
     /**
      * @return array<string, mixed>
      */
+    // Required fields for new books.
     public function rules(): array
     {
         return self::bookRules();
@@ -22,6 +24,7 @@ class StoreBookRequest extends FormRequest
     /**
      * @return array<string, mixed>
      */
+    // Shared field rules (create and patch).
     public static function bookRules(): array
     {
         return [

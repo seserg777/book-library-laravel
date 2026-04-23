@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateBookRequest extends FormRequest
 {
+    // No authorization yet.
     public function authorize(): bool
     {
         return true;
@@ -14,6 +15,7 @@ class UpdateBookRequest extends FormRequest
     /**
      * @return array<string, mixed>
      */
+    // Partial update: sometimes + each base rule.
     public function rules(): array
     {
         $rules = StoreBookRequest::bookRules();

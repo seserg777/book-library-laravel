@@ -14,6 +14,7 @@ class BookResource extends JsonResource
     /**
      * @return array<string, mixed>
      */
+    // Shape book for JSON API and clients.
     public function toArray(Request $request): array
     {
         return [
