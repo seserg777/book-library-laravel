@@ -55,4 +55,5 @@ The codebase has two sides:
 
 - Local development server: `php artisan serve`
 - Code style: `vendor/bin/pint` (Laravel Pint is included as a dev dependency)
+- Static analysis: `composer phpstan` — [PHPStan](https://phpstan.org/) level 7 via [Larastan](https://github.com/larastan/larastan), `--memory-limit=1G` (see `phpstan.neon`)
 - Tests: `php artisan test` or `vendor/bin/phpunit`

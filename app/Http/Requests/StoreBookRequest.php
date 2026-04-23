@@ -12,7 +12,7 @@ class StoreBookRequest extends FormRequest
     }
 
     /**
-     * @return array<string, array<int, string>>>
+     * @return array<string, mixed>
      */
     public function rules(): array
     {
@@ -20,7 +20,7 @@ class StoreBookRequest extends FormRequest
     }
 
     /**
-     * @return array<string, array<int, string>>>
+     * @return array<string, mixed>
      */
     public static function bookRules(): array
     {
